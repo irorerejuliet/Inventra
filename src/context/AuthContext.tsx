@@ -6,9 +6,10 @@ import { User } from "@/types/user";
 export interface AuthContextType {
   user: User | null;
   token: string | null;
+  loading: boolean;
 
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
-  setToken: React.Dispatch<React.SetStateAction<string | null>>;
+  login: (token: string, user: User) => void;
+  logout: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
