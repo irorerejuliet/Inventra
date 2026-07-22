@@ -1,6 +1,5 @@
 
-
-const page = () => {
+const SignupForm = () => {
   return (
     <div>
       
@@ -8,4 +7,4 @@ const page = () => {
   )
 }
 
-export default page
+export default SignupForm
