@@ -10,11 +10,12 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { loginSchema, LoginSchema } from "@/schemas/auth.schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { login } from "@/services/auth";
+import { login as loginApi } from "@/services/auth";
 import Image from "next/image";
 import { useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,23 +35,21 @@ export default function LoginForm() {
   if (!auth) {
     throw new Error("AuthContext must be used inside AuthProvider");
   }
-  const { setUser, setToken } = auth;
+  const { login: loginUser } = auth;
 
-  
   const onSubmit = async (data: LoginSchema) => {
     try {
-      const response = await login(data);
+      const response = await loginApi(data);
 
       const { user, token } = response.data;
 
-      setUser(user);
-      setToken(token);
+      loginUser(token, user);
 
       console.log("Login successful");
 
       router.push("/dashboard");
     } catch (error) {
-      console.error(error);
+      console.error("Login failed:", error);
     }
   };
 
