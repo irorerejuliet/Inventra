@@ -59,10 +59,6 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     restoreSession();
   }, [token]);
 
-  if (loading) {
-    return null;
-  }
-
   return (
     <AuthContext.Provider
       value={{

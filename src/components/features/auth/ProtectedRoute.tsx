@@ -1,15 +1,21 @@
 "use client";
 
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import useAuth from "@/hooks/useAuth";
+import { AuthContext } from "@/context/AuthContext";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { token, loading } = useAuth();
+  const auth = useContext(AuthContext);
+
+  if (!auth) {
+    throw new Error("ProtectedRoute must be used inside AuthProvider");
+  }
+
+  const { token, loading } = auth;
   const router = useRouter();
 
   useEffect(() => {
@@ -17,6 +23,11 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
       router.replace("/login");
     }
   }, [loading, token, router]);
+
+  console.log("ProtectedRoute:", {
+    loading,
+    token,
+  });
 
   if (loading) {
     return (
