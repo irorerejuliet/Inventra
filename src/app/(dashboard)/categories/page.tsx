@@ -28,6 +28,7 @@ const fakeCategories = [
 
 export default function CategoriesPage() {
   const [search, setSearch] = useState("");
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="space-y-6">
@@ -35,7 +36,7 @@ export default function CategoriesPage() {
         title="Categories"
         description="Manage all product categories in your inventory."
         buttonText="Add Category"
-        onButtonClick={() => console.log("Open modal")}
+        onButtonClick={() => setOpen(true)}
       />
 
       <CategoryToolbar
