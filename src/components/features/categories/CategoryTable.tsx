@@ -1,4 +1,6 @@
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
+import CategoryModal from "./CategoryModal";
+import { useState } from "react";
 
 interface Category {
   id: number;
@@ -11,7 +13,9 @@ interface CategoryTableProps {
   categories: Category[];
 }
 
-export default function CategoryTable({ categories }: CategoryTableProps) {
+export default function CategoryTable({ categories }: 
+    CategoryTableProps) {
+        const [open, setOpen] = useState(false);
   return (
     <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
       <table className="w-full">
@@ -64,6 +68,11 @@ export default function CategoryTable({ categories }: CategoryTableProps) {
           ))}
         </tbody>
       </table>
+      <CategoryModal open={open} onClose={() => setOpen(false)}>
+        <h2 className="text-2xl font-bold">Add Category</h2>
+
+        <p className="mt-2 text-slate-500">Category form will go here. okay</p>
+      </CategoryModal>
     </div>
   );
 }
