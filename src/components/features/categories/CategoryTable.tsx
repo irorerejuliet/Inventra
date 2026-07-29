@@ -71,7 +71,7 @@ export default function CategoryTable({ categories }:
       <CategoryModal open={open} onClose={() => setOpen(false)}>
         <h2 className="text-2xl font-bold">Add Category</h2>
 
-        <p className="mt-2 text-slate-500">Category form will go here.</p>
+        <p className="mt-2 text-slate-500">Category form will go here. okay</p>
       </CategoryModal>
     </div>
   );
